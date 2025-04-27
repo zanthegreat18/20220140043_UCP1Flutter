@@ -112,30 +112,47 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
             ),
             const SizedBox(height: 16),
             tugasPiketList.isEmpty
-                ? const Center(child: Text('Belum ada Data'))
+                ? const Center(
+                    child: Text(
+                      'Belum ada Data',
+                      style: TextStyle(color: Colors.redAccent),
+                    ),
+                  )
                 : ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: tugasPiketList.length,
                     itemBuilder: (context, index) {
                       final tugas = tugasPiketList[index];
-                      return Card(
-                        child: ListTile(                  
-                          subtitle: Text(
-                            '${tugas['tugas']}',
-                          ),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => DetailPiketPage(
-                                  nama: tugas['nama'] ?? '',
-                                  tanggal: tugas['tanggal'] ?? '',
-                                  tugas: tugas['tugas'] ?? '',
-                                ),
+                      return InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailPiketPage(
+                                nama: tugas['nama'] ?? '',
+                                tanggal: tugas['tanggal'] ?? '',
+                                tugas: tugas['tugas'] ?? '',
                               ),
-                            );
-                          },
+                            ),
+                          );
+                        },
+                        child: Card(
+                          color: Colors.redAccent,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: Text(
+                              tugas['tugas'] ?? '',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
                         ),
                       );
                     },
