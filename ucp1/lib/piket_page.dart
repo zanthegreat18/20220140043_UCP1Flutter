@@ -14,20 +14,22 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
   DateTime? _selectedDate;
   List<Map<String, String>> tugasPiketList = [];
 
+  bool _namaError = false;
+  bool _tanggalError = false;
+  bool _tugasError = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.redAccent,
-        centerTitle: true, // Biar judulnya di tengah
+        centerTitle: true,
         title: const Text(
           'Piket Gudang',
-          style: TextStyle(
-            color: Colors.white, // Warna tulisan jadi putih
-          ),
+          style: TextStyle(color: Colors.white),
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white), // Ikon back putih
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -44,6 +46,7 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
               controller: _namaController,
               decoration: InputDecoration(
                 hintText: 'Admin',
+                errorText: _namaError ? 'Nama tidak boleh kosong' : null,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16),
                 ),
@@ -57,7 +60,8 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
+                  border: Border.all(
+                      color: _tanggalError ? Colors.red : Colors.grey),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Row(
@@ -68,11 +72,22 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
                       _selectedDate == null
                           ? 'Pilih Tanggal'
                           : '${_selectedDate!.day}/${_selectedDate!.month}/${_selectedDate!.year}',
+                      style: TextStyle(
+                        color: _tanggalError ? Colors.red : Colors.black,
+                      ),
                     ),
                   ],
                 ),
               ),
             ),
+            if (_tanggalError)
+              const Padding(
+                padding: EdgeInsets.only(top: 8, left: 8),
+                child: Text(
+                  'Tanggal harus dipilih',
+                  style: TextStyle(color: Colors.red, fontSize: 12),
+                ),
+              ),
             const SizedBox(height: 16),
             const Text('Tugas Piket'),
             const SizedBox(height: 8),
@@ -83,6 +98,7 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
                     controller: _tugasController,
                     decoration: InputDecoration(
                       hintText: 'Tugas Piket',
+                      errorText: _tugasError ? 'Tugas tidak boleh kosong' : null,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),
@@ -185,14 +201,19 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
     if (picked != null) {
       setState(() {
         _selectedDate = picked;
+        _tanggalError = false; // reset error kalau user pilih tanggal
       });
     }
   }
 
   void _addTugas() {
-    if (_namaController.text.isNotEmpty &&
-        _selectedDate != null &&
-        _tugasController.text.isNotEmpty) {
+    setState(() {
+      _namaError = _namaController.text.isEmpty;
+      _tanggalError = _selectedDate == null;
+      _tugasError = _tugasController.text.isEmpty;
+    });
+
+    if (!_namaError && !_tanggalError && !_tugasError) {
       setState(() {
         tugasPiketList.add({
           'nama': _namaController.text,
