@@ -18,7 +18,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255), 
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -29,11 +29,11 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   const SizedBox(height: 40),
 
-                  // Gambar custom lu disini bro
+                  /// GAMBAR
                   SizedBox(
                     height: 250,
                     child: Image.asset(
-                      'assets/image/apple.png', // Pastikan path & nama file bener ya bro!
+                      'assets/image/apple.png',
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -50,25 +50,65 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 30),
 
-                  /// EMAIL
+                  /// EMAIL LABEL
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Email',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.brown.shade700,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+
+                  /// EMAIL TEXTFIELD
                   TextFormField(
                     controller: emailController,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
+                      hintText: 'Email',
                       prefixIcon: const Icon(Icons.email_rounded, color: Colors.brown),
-                      labelText: 'Email',
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                      filled: true,
+                      fillColor: Colors.white,
+                      contentPadding: const EdgeInsets.symmetric(vertical: 18, horizontal: 20),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.brown, width: 1),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.redAccent, width: 2),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                     ),
                     validator: (value) =>
                         value == null || value.isEmpty ? 'Masukkan email' : null,
                   ),
+
                   const SizedBox(height: 20),
 
-                  /// PASSWORD
+                  /// PASSWORD LABEL
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Password',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.brown.shade700,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+
+                  /// PASSWORD TEXTFIELD
                   TextFormField(
                     controller: passwordController,
                     obscureText: obscurePassword,
                     decoration: InputDecoration(
+                      hintText: 'Password',
                       prefixIcon: const Icon(Icons.lock, color: Colors.brown),
                       suffixIcon: IconButton(
                         icon: Icon(
@@ -79,12 +119,22 @@ class _LoginPageState extends State<LoginPage> {
                           setState(() => obscurePassword = !obscurePassword);
                         },
                       ),
-                      labelText: 'Password',
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                      filled: true,
+                      fillColor: Colors.white,
+                      contentPadding: const EdgeInsets.symmetric(vertical: 18, horizontal: 20),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.brown, width: 1),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.redAccent, width: 2),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                     ),
                     validator: (value) =>
                         value == null || value.isEmpty ? 'Masukkan password' : null,
                   ),
+
                   const SizedBox(height: 30),
 
                   /// TOMBOL LOGIN
@@ -109,10 +159,11 @@ class _LoginPageState extends State<LoginPage> {
                       },
                       child: const Text(
                         'Masuk',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                       ),
                     ),
                   ),
+
                   const SizedBox(height: 24),
 
                   /// LINK DAFTAR
@@ -137,6 +188,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ],
                   ),
+
                   const SizedBox(height: 40),
                 ],
               ),

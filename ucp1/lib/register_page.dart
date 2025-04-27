@@ -22,132 +22,118 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255), 
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Form(
             key: formKey,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 40),
-                
-                // Logo atau gambar
-                SizedBox(
-                  height: 100,
-                  child: Image.asset(
-                    'assets/image/apple.png', // Sama kayak login
-                    fit: BoxFit.contain,
+
+                /// Logo
+                Center(
+                  child: SizedBox(
+                    height: 100,
+                    child: Image.asset(
+                      'assets/image/apple.png',
+                      fit: BoxFit.contain,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 20),
-                const Text(
-                  'DAFTAR AKUN BARU',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
+
+                const Center(
+                  child: Text(
+                    'DAFTAR AKUN BARU',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 30),
 
-                /// NAMA
-                TextFormField(
+                /// Nama Lengkap
+                _buildLabel('Nama Lengkap'),
+                _buildInputField(
                   controller: nameController,
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.person, color: Colors.brown),
-                    labelText: 'Nama Lengkap',
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                  ),
-                  validator: (value) =>
-                      value == null || value.isEmpty ? 'Masukkan nama lengkap' : null,
+                  hintText: 'Nama Lengkap',
+                  icon: Icons.person,
                 ),
                 const SizedBox(height: 20),
 
-                /// Email & No HP (2 kolom)
+                /// Email & No HP
                 Row(
                   children: [
                     Expanded(
-                      child: TextFormField(
-                        controller: emailController,
-                        decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.email, color: Colors.brown),
-                          labelText: 'Email',
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                        ),
-                        validator: (value) =>
-                            value == null || value.isEmpty ? 'Masukkan email' : null,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildLabel('Email'),
+                          _buildInputField(
+                            controller: emailController,
+                            hintText: 'Email',
+                            icon: Icons.email,
+                          ),
+                        ],
                       ),
                     ),
                     const SizedBox(width: 10),
                     Expanded(
-                      child: TextFormField(
-                        controller: phoneController,
-                        decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.phone, color: Colors.brown),
-                          labelText: 'No HP',
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                        ),
-                        validator: (value) =>
-                            value == null || value.isEmpty ? 'Masukkan no HP' : null,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildLabel('No HP'),
+                          _buildInputField(
+                            controller: phoneController,
+                            hintText: 'No HP',
+                            icon: Icons.phone,
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 20),
 
-                /// Password & Konfirmasi Password (2 kolom)
+                /// Password & Konfirmasi Password
                 Row(
                   children: [
                     Expanded(
-                      child: TextFormField(
-                        controller: passwordController,
-                        obscureText: obscurePassword,
-                        decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.lock, color: Colors.brown),
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              obscurePassword ? Icons.visibility_off : Icons.visibility,
-                              color: Colors.grey,
-                            ),
-                            onPressed: () {
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildLabel('Password'),
+                          _buildPasswordField(
+                            controller: passwordController,
+                            hintText: 'Password',
+                            obscureText: obscurePassword,
+                            toggle: () {
                               setState(() => obscurePassword = !obscurePassword);
                             },
                           ),
-                          labelText: 'Password',
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                        ),
-                        validator: (value) =>
-                            value == null || value.isEmpty ? 'Masukkan password' : null,
+                        ],
                       ),
                     ),
                     const SizedBox(width: 10),
                     Expanded(
-                      child: TextFormField(
-                        controller: confirmPasswordController,
-                        obscureText: obscureConfirmPassword,
-                        decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.lock, color: Colors.brown),
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              obscureConfirmPassword ? Icons.visibility_off : Icons.visibility,
-                              color: Colors.grey,
-                            ),
-                            onPressed: () {
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildLabel('Konfirmasi Password'),
+                          _buildPasswordField(
+                            controller: confirmPasswordController,
+                            hintText: 'Konfirmasi Password',
+                            obscureText: obscureConfirmPassword,
+                            toggle: () {
                               setState(() => obscureConfirmPassword = !obscureConfirmPassword);
                             },
                           ),
-                          labelText: 'Konfirmasi Password',
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Konfirmasi password';
-                          } else if (value != passwordController.text) {
-                            return 'Password tidak cocok';
-                          }
-                          return null;
-                        },
+                        ],
                       ),
                     ),
                   ],
@@ -168,7 +154,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                        // TODO: Tambahkan logic daftar user di sini
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Berhasil daftar!')),
                         );
@@ -216,5 +201,87 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
   }
-}
 
+  /// Helper buat label kecil di atas TextField
+  Widget _buildLabel(String text) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.bold,
+        color: Colors.brown.shade700,
+      ),
+    );
+  }
+
+  /// Helper buat Input Field biasa
+  Widget _buildInputField({
+    required TextEditingController controller,
+    required String hintText,
+    required IconData icon,
+  }) {
+    return TextFormField(
+      controller: controller,
+      decoration: InputDecoration(
+        hintText: hintText,
+        prefixIcon: Icon(icon, color: Colors.brown),
+        filled: true,
+        fillColor: Colors.white,
+        contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
+          borderSide: const BorderSide(color: Colors.grey, width: 1),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
+          borderSide: const BorderSide(color: Colors.redAccent, width: 2),
+        ),
+      ),
+      validator: (value) => value == null || value.isEmpty ? 'Wajib diisi' : null,
+    );
+  }
+
+  /// Helper buat Password Field
+  Widget _buildPasswordField({
+    required TextEditingController controller,
+    required String hintText,
+    required bool obscureText,
+    required VoidCallback toggle,
+  }) {
+    return TextFormField(
+      controller: controller,
+      obscureText: obscureText,
+      decoration: InputDecoration(
+        hintText: hintText,
+        prefixIcon: const Icon(Icons.lock, color: Colors.brown),
+        suffixIcon: IconButton(
+          icon: Icon(
+            obscureText ? Icons.visibility_off : Icons.visibility,
+            color: Colors.grey,
+          ),
+          onPressed: toggle,
+        ),
+        filled: true,
+        fillColor: Colors.white,
+        contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
+          borderSide: const BorderSide(color: Colors.grey, width: 1),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
+          borderSide: const BorderSide(color: Colors.redAccent, width: 2),
+        ),
+      ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Wajib diisi';
+        }
+        if (controller == confirmPasswordController && value != passwordController.text) {
+          return 'Password tidak cocok';
+        }
+        return null;
+      },
+    );
+  }
+}

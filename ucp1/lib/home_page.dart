@@ -77,7 +77,7 @@ class HomePage extends StatelessWidget {
                     children: [
                       Expanded(
                         child: MenuCard(
-                          icon: Icons.data_usage,
+                          icon: Icons.repeat_one,
                           label: 'Data Piket',
                           onTap: () {
                             Navigator.push(
