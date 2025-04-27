@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Avatar
-                  CircleAvatar(
+                  const CircleAvatar(
                     radius: 30,
                     backgroundImage: AssetImage('assets/image/avatar.jpeg'),
                   ),
@@ -48,7 +48,7 @@ class HomePage extends StatelessWidget {
                   const Spacer(),
                   IconButton(
                     onPressed: () {
-                      Navigator.pop(context); // balik ke login / sebelumnya
+                      Navigator.pop(context); // logout ke halaman sebelumnya
                     },
                     icon: const Icon(Icons.logout, color: Colors.white),
                   ),
@@ -88,7 +88,7 @@ class HomePage extends StatelessWidget {
                           },
                         ),
                       ),
-                     const SizedBox(width: 16),
+                      const SizedBox(width: 16),
                       Expanded(
                         child: MenuCard(
                           icon: Icons.add_home_work_sharp,
@@ -97,7 +97,7 @@ class HomePage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const DataPelangganPage(), // <<< Ini beneran ke page pelanggan bang
+                                builder: (context) => const DataPelangganPage(),
                               ),
                             );
                           },
@@ -110,7 +110,7 @@ class HomePage extends StatelessWidget {
                     icon: Icons.receipt_long,
                     label: 'Barang Masuk/Keluar',
                     onTap: () {
-                      // nanti bisa diisi ke halaman barang
+                      // Arahkan nanti ke halaman Barang Masuk/Keluar
                     },
                     isFullWidth: true,
                   ),
@@ -145,23 +145,27 @@ class MenuCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: isFullWidth ? double.infinity : null,
-        height: 120,
+        height: 180, 
         decoration: BoxDecoration(
           color: Colors.redAccent,
           borderRadius: BorderRadius.circular(20),
         ),
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(icon, color: Colors.white, size: 40),
-              const SizedBox(height: 8),
-              Text(
-                label,
-                style: const TextStyle(color: Colors.white, fontSize: 16),
+        padding: const EdgeInsets.all(16), 
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, color: Colors.white, size: 48), 
+            const SizedBox(height: 12),
+            Text(
+              label,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 18, 
+                fontWeight: FontWeight.w600,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
