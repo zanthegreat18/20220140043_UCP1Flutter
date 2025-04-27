@@ -18,7 +18,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFEF7F4), 
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -28,8 +28,18 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 children: [
                   const SizedBox(height: 40),
-                  const Icon(Icons.arrow_drop_up, size: 100, color: Colors.black),
+
+                  // Gambar custom lu disini bro
+                  SizedBox(
+                    height: 250,
+                    child: Image.asset(
+                      'assets/image/apple.png', // Pastikan path & nama file bener ya bro!
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+
                   const SizedBox(height: 20),
+
                   const Text(
                     'SELAMAT DATANG KEMBALI',
                     style: TextStyle(
@@ -91,7 +101,6 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
-                          // Arahkan ke halaman beranda
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(builder: (context) => const HomePage()),
@@ -120,7 +129,10 @@ class _LoginPageState extends State<LoginPage> {
                         },
                         child: const Text(
                           "Daftar disini!",
-                          style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            color: Colors.redAccent,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ],
