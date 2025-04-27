@@ -60,7 +60,7 @@ class HomePage extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               child: Image.asset(
                 'assets/image/banner.jpeg',
-                width: MediaQuery.of(context).size.width,
+                width: MediaQuery.of(context).size.aspectRatio * 920,
                 height: 160,
                 fit: BoxFit.cover,
               ),
