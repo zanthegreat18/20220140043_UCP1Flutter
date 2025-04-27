@@ -57,119 +57,131 @@ class _PendataanBarangPageState extends State<PendataanBarangPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFFDF7F5),
-      appBar: AppBar(
-        backgroundColor: Colors.redAccent,
-        title: const Text('Pendataan Barang'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text('Tanggal Transaksi'),
-              const SizedBox(height: 8),
-              GestureDetector(
-                onTap: _pickDate,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.calendar_today, color: Colors.grey),
-                      const SizedBox(width: 12),
-                      Text(
-                        selectedDate != null
-                            ? DateFormat('dd-MM-yyyy').format(selectedDate!)
-                            : 'Tanggal Transaksi',
-                        style: const TextStyle(color: Colors.black54),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-              DropdownButtonFormField<String>(
-                decoration: InputDecoration(
-                  labelText: 'Jenis Transaksi',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                items: jenisTransaksiList
-                    .map((jenis) => DropdownMenuItem(value: jenis, child: Text(jenis)))
-                    .toList(),
-                onChanged: (value) {
-                  setState(() {
-                    selectedJenisTransaksi = value;
-                  });
-                },
-              ),
-              const SizedBox(height: 16),
-              DropdownButtonFormField<String>(
-                decoration: InputDecoration(
-                  labelText: 'Jenis Barang',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                items: jenisBarangList
-                    .map((barang) => DropdownMenuItem(value: barang, child: Text(barang)))
-                    .toList(),
-                onChanged: (value) {
-                  setState(() {
-                    selectedJenisBarang = value;
-                  });
-                },
-              ),
-              const SizedBox(height: 16),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: jumlahController,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        labelText: 'Jumlah Barang',
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: TextField(
-                      controller: hargaController,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        prefixText: 'Rp. ',
-                        labelText: 'Harga Satuan',
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 32),
-              SizedBox(
-                width: double.infinity,
-                height: 55,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.redAccent,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                  ),
-                  onPressed: _submitData,
-                  child: const Text('Submit', style: TextStyle(fontSize: 16)),
-                ),
-              ),
-            ],
-          ),
+Widget build(BuildContext context) {
+  return Scaffold(
+    backgroundColor: const Color(0xFFFDF7F5),
+    appBar: AppBar(
+      backgroundColor: Colors.redAccent,
+      centerTitle: true, 
+      title: const Text(
+        'Pendataan Barang',
+        style: TextStyle(
+          color: Colors.white, 
+          fontSize: 22,
+          fontWeight: FontWeight.bold,
         ),
       ),
-    );
-  }
+      iconTheme: const IconThemeData(color: Colors.white), 
+    ),
+    body: Padding(
+      padding: const EdgeInsets.all(16),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('Tanggal Transaksi'),
+            const SizedBox(height: 8),
+            GestureDetector(
+              onTap: _pickDate,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.calendar_today, color: Colors.grey),
+                    const SizedBox(width: 12),
+                    Text(
+                      selectedDate != null
+                          ? DateFormat('dd-MM-yyyy').format(selectedDate!)
+                          : 'Tanggal Transaksi',
+                      style: const TextStyle(color: Colors.black54),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            DropdownButtonFormField<String>(
+              decoration: InputDecoration(
+                labelText: 'Jenis Transaksi',
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+              ),
+              items: jenisTransaksiList
+                  .map((jenis) => DropdownMenuItem(value: jenis, child: Text(jenis)))
+                  .toList(),
+              onChanged: (value) {
+                setState(() {
+                  selectedJenisTransaksi = value;
+                });
+              },
+            ),
+            const SizedBox(height: 16),
+            DropdownButtonFormField<String>(
+              decoration: InputDecoration(
+                labelText: 'Jenis Barang',
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+              ),
+              items: jenisBarangList
+                  .map((barang) => DropdownMenuItem(value: barang, child: Text(barang)))
+                  .toList(),
+              onChanged: (value) {
+                setState(() {
+                  selectedJenisBarang = value;
+                });
+              },
+            ),
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: jumlahController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      labelText: 'Jumlah Barang',
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: TextField(
+                    controller: hargaController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      prefixText: 'Rp. ',
+                      labelText: 'Harga Satuan',
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 32),
+            SizedBox(
+              width: double.infinity,
+              height: 55,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.redAccent,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+                onPressed: _submitData,
+                child: const Text(
+                  'Submit',
+                  style: TextStyle(fontSize: 16, color: Colors.white),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
 }
