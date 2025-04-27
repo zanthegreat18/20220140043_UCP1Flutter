@@ -143,14 +143,26 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.all(16),
-                            child: Text(
-                              tugas['tugas'] ?? '',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    tugas['tugas'] ?? '',
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                const Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: Colors.white,
+                                  size: 16,
+                                ),
+                              ],
                             ),
                           ),
                         ),
