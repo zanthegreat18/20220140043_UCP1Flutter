@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'piket_page.dart'; 
 import 'pelanggan_page.dart';
+import 'data_barang_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -110,7 +111,12 @@ class HomePage extends StatelessWidget {
                     icon: Icons.receipt_long,
                     label: 'Barang Masuk/Keluar',
                     onTap: () {
-                      // Arahkan nanti ke halaman Barang Masuk/Keluar
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const PendataanBarangPage(),
+                        ),
+                      );
                     },
                     isFullWidth: true,
                   ),
