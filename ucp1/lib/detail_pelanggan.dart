@@ -60,16 +60,16 @@ class DetailPelangganPage extends StatelessWidget {
                 Expanded(child: _buildInfoField(label: 'Kode Pos', value: kodePos)),
               ],
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: 60),
             ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.redAccent,
-                padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 18),
+                padding: const EdgeInsets.symmetric(horizontal: 170, vertical: 18),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(15),
                 ),
               ),
               child: const Text('Selesai'),
