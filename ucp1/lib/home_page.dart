@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'piket_page.dart'; // Pastikan ini bener ya bro
+import 'piket_page.dart'; 
+import 'pelanggan_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -87,13 +88,18 @@ class HomePage extends StatelessWidget {
                           },
                         ),
                       ),
-                      const SizedBox(width: 16),
+                     const SizedBox(width: 16),
                       Expanded(
                         child: MenuCard(
                           icon: Icons.add_home_work_sharp,
                           label: 'Data Pelanggan',
                           onTap: () {
-                            // nanti bisa diisi ke halaman pelanggan
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const DataPelangganPage(), // <<< Ini beneran ke page pelanggan bro!
+                              ),
+                            );
                           },
                         ),
                       ),
