@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'detail_pelanggan.dart'; 
 
 class DataPelangganPage extends StatefulWidget {
   const DataPelangganPage({super.key});
@@ -29,16 +30,43 @@ class _DataPelangganPageState extends State<DataPelangganPage> {
 
   void _simpanData() {
     if (_formKey.currentState!.validate()) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Data pelanggan berhasil disimpan!')),
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DetailPelangganPage(
+            nama: _namaController.text,
+            email: _emailController.text,
+            noHp: _noHpController.text,
+            alamat: _alamatController.text,
+            provinsi: _provinsiController.text,
+            kodePos: _kodePosController.text,
+          ),
+        ),
       );
     }
   }
 
-  Widget _buildTextField(
-      {required String label,
-      required TextEditingController controller,
-      TextInputType keyboardType = TextInputType.text}) {
+  String? _validateField(String label, String? value) {
+    if (value == null || value.isEmpty) {
+      return '$label tidak boleh kosong';
+    }
+    if (label == 'Email' && !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
+      return 'Format email tidak valid';
+    }
+    if (label == 'No Hp' && !RegExp(r'^[0-9]{10,15}$').hasMatch(value)) {
+      return 'No Hp harus angka 10-15 digit';
+    }
+    if (label == 'Kode Pos' && !RegExp(r'^[0-9]{5}$').hasMatch(value)) {
+      return 'Kode Pos harus 5 digit angka';
+    }
+    return null;
+  }
+
+  Widget _buildTextField({
+    required String label,
+    required TextEditingController controller,
+    TextInputType keyboardType = TextInputType.text,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -47,12 +75,7 @@ class _DataPelangganPageState extends State<DataPelangganPage> {
         TextFormField(
           controller: controller,
           keyboardType: keyboardType,
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return '$label tidak boleh kosong';
-            }
-            return null;
-          },
+          validator: (value) => _validateField(label, value),
           decoration: InputDecoration(
             hintText: label,
             border: OutlineInputBorder(
