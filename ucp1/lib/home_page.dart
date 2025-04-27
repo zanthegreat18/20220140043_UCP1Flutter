@@ -97,7 +97,7 @@ class HomePage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const DataPelangganPage(), // <<< Ini beneran ke page pelanggan bro!
+                                builder: (context) => const DataPelangganPage(), // <<< Ini beneran ke page pelanggan bang
                               ),
                             );
                           },

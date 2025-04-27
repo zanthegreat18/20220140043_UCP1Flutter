@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ucp1/login_page.dart';
-import 'package:ucp1/register_page.dart'; // <--- Import register page juga bro
+import 'package:ucp1/register_page.dart'; 
 
 void main() {
   runApp(const MyApp());
