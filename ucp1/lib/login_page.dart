@@ -18,7 +18,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255), 
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -29,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   const SizedBox(height: 40),
 
-                  /// GAMBAR
+                  // GAMBAR
                   SizedBox(
                     height: 250,
                     child: Image.asset(
@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 30),
 
-                  /// EMAIL LABEL
+                  // EMAIL LABEL
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 8),
 
-                  /// EMAIL TEXTFIELD
+                  // EMAIL TEXTFIELD
                   TextFormField(
                     controller: emailController,
                     keyboardType: TextInputType.emailAddress,
@@ -89,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
 
                   const SizedBox(height: 20),
 
-                  /// PASSWORD LABEL
+                  // PASSWORD LABEL
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
@@ -103,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 8),
 
-                  /// PASSWORD TEXTFIELD
+                  // PASSWORD TEXTFIELD
                   TextFormField(
                     controller: passwordController,
                     obscureText: obscurePassword,
@@ -137,7 +137,7 @@ class _LoginPageState extends State<LoginPage> {
 
                   const SizedBox(height: 30),
 
-                  /// TOMBOL LOGIN
+                  // TOMBOL LOGIN
                   SizedBox(
                     width: double.infinity,
                     height: 55,
@@ -153,20 +153,26 @@ class _LoginPageState extends State<LoginPage> {
                         if (formKey.currentState!.validate()) {
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => const HomePage()),
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  HomePage(username: emailController.text),
+                            ),
                           );
                         }
                       },
                       child: const Text(
                         'Masuk',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
                       ),
                     ),
                   ),
 
                   const SizedBox(height: 24),
 
-                  /// LINK DAFTAR
+                  // LINK DAFTAR
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -175,7 +181,8 @@ class _LoginPageState extends State<LoginPage> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const RegisterPage()),
+                            MaterialPageRoute(
+                                builder: (context) => const RegisterPage()),
                           );
                         },
                         child: const Text(

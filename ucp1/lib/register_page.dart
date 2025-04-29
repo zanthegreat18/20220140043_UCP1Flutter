@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'login_page.dart'; // jangan lupa import bro
+import 'home_page.dart'; // Import HomePage bro
+import 'login_page.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -22,7 +23,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255), 
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -32,32 +33,21 @@ class _RegisterPageState extends State<RegisterPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 40),
-
-                /// Logo
                 Center(
                   child: SizedBox(
                     height: 100,
-                    child: Image.asset(
-                      'assets/image/apple.png',
-                      fit: BoxFit.contain,
-                    ),
+                    child: Image.asset('assets/image/apple.png'),
                   ),
                 ),
                 const SizedBox(height: 20),
-
                 const Center(
                   child: Text(
                     'DAFTAR AKUN BARU',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
                 const SizedBox(height: 30),
 
-                /// Nama Lengkap
                 _buildLabel('Nama Lengkap'),
                 _buildInputField(
                   controller: nameController,
@@ -66,7 +56,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 const SizedBox(height: 20),
 
-                /// Email & No HP
                 Row(
                   children: [
                     Expanded(
@@ -100,7 +89,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 const SizedBox(height: 20),
 
-                /// Password & Konfirmasi Password
                 Row(
                   children: [
                     Expanded(
@@ -112,9 +100,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             controller: passwordController,
                             hintText: 'Password',
                             obscureText: obscurePassword,
-                            toggle: () {
-                              setState(() => obscurePassword = !obscurePassword);
-                            },
+                            toggle: () => setState(() => obscurePassword = !obscurePassword),
                           ),
                         ],
                       ),
@@ -129,9 +115,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             controller: confirmPasswordController,
                             hintText: 'Konfirmasi Password',
                             obscureText: obscureConfirmPassword,
-                            toggle: () {
-                              setState(() => obscureConfirmPassword = !obscureConfirmPassword);
-                            },
+                            toggle: () => setState(() => obscureConfirmPassword = !obscureConfirmPassword),
                           ),
                         ],
                       ),
@@ -140,7 +124,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 const SizedBox(height: 30),
 
-                /// Tombol Daftar
                 SizedBox(
                   width: double.infinity,
                   height: 55,
@@ -150,32 +133,29 @@ class _RegisterPageState extends State<RegisterPage> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      elevation: 4,
                     ),
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Berhasil daftar!')),
-                        );
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => const LoginPage()),
+                          MaterialPageRoute(
+                            builder: (context) => HomePage(username: nameController.text),
+                          ),
                         );
                       }
                     },
                     child: const Text(
                       'Daftar',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
                 const SizedBox(height: 24),
 
-                /// Link ke login
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Sudah memiliki akun? "),
+                    const Text("Sudah punya akun? "),
                     GestureDetector(
                       onTap: () {
                         Navigator.pushReplacement(
@@ -185,10 +165,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       },
                       child: const Text(
                         "Login disini!",
-                        style: TextStyle(
-                          color: Colors.redAccent,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
@@ -202,7 +179,6 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  /// Helper buat label kecil di atas TextField
   Widget _buildLabel(String text) {
     return Text(
       text,
@@ -214,7 +190,6 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  /// Helper buat Input Field biasa
   Widget _buildInputField({
     required TextEditingController controller,
     required String hintText,
@@ -230,7 +205,7 @@ class _RegisterPageState extends State<RegisterPage> {
         contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
-          borderSide: const BorderSide(color: Colors.grey, width: 1),
+          borderSide: const BorderSide(color: Colors.grey),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
@@ -241,7 +216,6 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  /// Helper buat Password Field
   Widget _buildPasswordField({
     required TextEditingController controller,
     required String hintText,
@@ -266,7 +240,7 @@ class _RegisterPageState extends State<RegisterPage> {
         contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
-          borderSide: const BorderSide(color: Colors.grey, width: 1),
+          borderSide: const BorderSide(color: Colors.grey),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),

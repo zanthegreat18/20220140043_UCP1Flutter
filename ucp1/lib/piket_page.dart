@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'detail_piket_page.dart'; // Jangan lupa import ini!
+import 'detail_piket_page.dart';
 
 class PiketGudangPage extends StatefulWidget {
-  const PiketGudangPage({super.key});
+  final String username;
+  const PiketGudangPage({super.key, required this.username});
 
   @override
   State<PiketGudangPage> createState() => _PiketGudangPageState();
@@ -19,20 +20,21 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
   bool _tugasError = false;
 
   @override
+  void initState() {
+    super.initState();
+    _namaController.text = widget.username; // Auto-isi username
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.redAccent,
         centerTitle: true,
-        title: const Text(
-          'Piket Gudang',
-          style: TextStyle(color: Colors.white),
-        ),
+        title: const Text('Piket Gudang', style: TextStyle(color: Colors.white)),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: () => Navigator.pop(context),
         ),
       ),
       body: SingleChildScrollView(
@@ -44,6 +46,7 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
             const SizedBox(height: 8),
             TextField(
               controller: _namaController,
+              readOnly: true, // Biar nggak bisa diedit, opsional
               decoration: InputDecoration(
                 hintText: 'Admin',
                 errorText: _namaError ? 'Nama tidak boleh kosong' : null,
@@ -60,8 +63,7 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
                 decoration: BoxDecoration(
-                  border: Border.all(
-                      color: _tanggalError ? Colors.red : Colors.grey),
+                  border: Border.all(color: _tanggalError ? Colors.red : Colors.grey),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Row(
@@ -83,10 +85,8 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
             if (_tanggalError)
               const Padding(
                 padding: EdgeInsets.only(top: 8, left: 8),
-                child: Text(
-                  'Tanggal harus dipilih',
-                  style: TextStyle(color: Colors.red, fontSize: 12),
-                ),
+                child: Text('Tanggal harus dipilih',
+                    style: TextStyle(color: Colors.red, fontSize: 12)),
               ),
             const SizedBox(height: 16),
             const Text('Tugas Piket'),
@@ -129,10 +129,8 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
             const SizedBox(height: 16),
             tugasPiketList.isEmpty
                 ? const Center(
-                    child: Text(
-                      'Belum ada Data',
-                      style: TextStyle(color: Colors.redAccent),
-                    ),
+                    child: Text('Belum ada Data',
+                        style: TextStyle(color: Colors.redAccent)),
                   )
                 : ListView.builder(
                     shrinkWrap: true,
@@ -159,7 +157,8 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 20),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -173,11 +172,8 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
                                     ),
                                   ),
                                 ),
-                                const Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: Colors.white,
-                                  size: 16,
-                                ),
+                                const Icon(Icons.arrow_forward_ios,
+                                    color: Colors.white, size: 16),
                               ],
                             ),
                           ),
@@ -201,7 +197,7 @@ class _PiketGudangPageState extends State<PiketGudangPage> {
     if (picked != null) {
       setState(() {
         _selectedDate = picked;
-        _tanggalError = false; // reset error kalau user pilih tanggal
+        _tanggalError = false;
       });
     }
   }
